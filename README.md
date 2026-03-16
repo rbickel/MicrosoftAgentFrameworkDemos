@@ -13,6 +13,7 @@ Each demo is self-contained — install the dependencies, set a few environment 
 | # | Notebook | Topic | Key Concepts |
 |---|----------|-------|--------------|
 | 1 | [Sequential Workflow Demo](#1-sequential-workflow-demo) | Multi-agent sequential orchestration | `SequentialBuilder`, local agents, event streaming |
+| 2 | [Concurrent Workflow Demo](#3-concurrent-workflow-demo) | Multi-agent concurrent orchestration | `ConcurrentBuilder`, fan-out/fan-in, custom aggregator, parallel agents |
 
 ---
 
@@ -39,6 +40,37 @@ The notebook walks through installing dependencies, configuring Azure credential
 - Sequential orchestration with `SequentialBuilder`
 - Real-time workflow event streaming
 - Multi-agent conversation context passing
+
+**Prerequisites:**
+
+- Python 3.10+
+- An Azure AI Foundry project endpoint
+- Azure CLI login (`az login`) or another credential supported by `DefaultAzureCredential`
+- A `.env` file with `AZURE_AI_PROJECT_ENDPOINT` (see notebook for details)
+
+### 2. Concurrent Workflow Demo
+
+| | |
+|---|---|
+| **Notebook** | [`concurrent_workflow_demo.ipynb`](concurrent_workflow_demo.ipynb) |
+| **Difficulty** | Intermediate |
+| **Estimated time** | 15–20 min |
+
+**What it does:** Runs three specialist agents in parallel to evaluate the same product idea from different perspectives (technical, business, creative), then aggregates their outputs.
+
+- **Agent 1 — Technical Advisor** evaluates feasibility, architecture, tech stack, and scalability
+- **Agent 2 — Business Strategist** analyzes market opportunity, competitive landscape, and ROI
+- **Agent 3 — Creative Director** explores UX innovation, brand narrative, and viral potential
+
+The notebook demonstrates two execution modes: a default aggregator that collects all agent responses, and a custom callback-based aggregator that produces a structured executive summary.
+
+**Concepts covered:**
+
+- Concurrent orchestration with `ConcurrentBuilder` (fan-out/fan-in pattern)
+- Running multiple agents in parallel on the same input
+- Default vs custom aggregation of concurrent results
+- Real-time workflow event streaming
+- Independent agent perspectives for richer problem analysis
 
 **Prerequisites:**
 
@@ -89,6 +121,7 @@ code sequential_workflow_demo.ipynb
 MicrosoftAgentFrameworkDemos/
 ├── README.md                          ← You are here
 ├── sequential_workflow_demo.ipynb     ← Demo 1: Sequential multi-agent workflow
+├── concurrent_workflow_demo.ipynb     ← Demo 2: Concurrent multi-agent workflow
 ├── .env                               ← Your Azure config (not committed)
 └── LICENSE
 ```
